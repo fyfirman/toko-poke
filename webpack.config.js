@@ -3,11 +3,11 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 /** @type {import('webpack').Configuration} */
 module.exports = {
-  entry: path.resolve('src/index.tsx'),
+  entry: path.resolve("src/index.tsx"),
   output: {
     path: path.join(__dirname, "/dist"),
     filename: "[name].bundle.js",
-    chunkFilename: '[name].[chunkhash].bundle.js',
+    chunkFilename: "[name].[chunkhash].bundle.js",
   },
   devServer: {
     port: 3000,
@@ -29,14 +29,14 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg|ico)$/i,
         use: [
           {
-            loader: 'file-loader',
+            loader: "file-loader",
           },
         ],
       },
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: [".tsx", ".ts", ".js"],
   },
   plugins: [new HtmlWebpackPlugin({ template: "./public/index.html" })],
 };
