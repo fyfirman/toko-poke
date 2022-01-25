@@ -8,7 +8,6 @@ module.exports = {
   },
   devServer: {
     port: 3000,
-    watchContentBase: true,
   },
   module: {
     rules: [
@@ -25,5 +24,5 @@ module.exports = {
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({ template: "./src/index.html" })],
+  plugins: [new HtmlWebpackPlugin({ template: "./public/index.html" })],
 };
