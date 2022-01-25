@@ -67,7 +67,9 @@
         "jest/no-identical-title": "error",
         "jest/prefer-to-have-length": "warn",
         "jest/valid-expect": "error",
-        "jest/valid-describe": "warn"
+        "jest/valid-describe": "warn",
+        "@typescript-eslint/no-unsafe-call": "off",
+        "@typescript-eslint/no-unsafe-member-access": "off"
       }
     }
   ],
