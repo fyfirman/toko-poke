@@ -7,6 +7,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, "/dist"),
     filename: "[name].bundle.js",
+    chunkFilename: '[name].[chunkhash].bundle.js',
   },
   devServer: {
     port: 3000,
@@ -23,7 +24,15 @@ module.exports = {
         use: {
           loader: "ts-loader",
         },
-      }
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg|ico)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ],
   },
   resolve: {
