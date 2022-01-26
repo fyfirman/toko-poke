@@ -1,0 +1,21 @@
+{
+  "typescriptReactArrowFunctionExportComponent": {
+    "prefix": "tscomp",
+    "body": [
+      "import React from 'react';",
+      "import styled from '@emotion/styled';",
+      "",
+      "interface ${TM_FILENAME_BASE}Props {",
+      "  ${1}",
+      "};",
+      "",
+      "const ${TM_FILENAME_BASE}: React.FC<${TM_FILENAME_BASE}Props> = (props) => {",
+      "  return <div>$0</div>;",
+      "};",
+      "",
+      "export default ${TM_FILENAME_BASE};",
+      ""
+    ],
+    "description": "Creates a React Arrow Function Component"
+  }
+}
