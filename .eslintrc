@@ -10,7 +10,7 @@
     "plugin:import/typescript",
     "plugin:jest/recommended"
   ],
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "@emotion"],
   "rules": {
     "@typescript-eslint/no-explicit-any": "warn",
     "import/extensions": [

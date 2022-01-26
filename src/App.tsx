@@ -1,11 +1,15 @@
-import React from "react";
+import styled from "@emotion/styled";
+
+const Container = styled.div`
+  color: hotpink;
+`;
 
 function App() {
   return (
-    <div>
-      <h2>Welcome to React App</h2>
+    <Container>
+      <h2>Welcome to React App!</h2>
       <h3>Date : {new Date().toDateString()}</h3>
-    </div>
+    </Container>
   );
 }
 
