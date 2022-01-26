@@ -1,15 +1,15 @@
-import styled from "@emotion/styled";
-
-const Container = styled.div`
-  color: hotpink;
-`;
+import { ThemeProvider } from "@emotion/react";
+import { BrowserRouter } from "react-router-dom";
+import theme from "./lib/theme";
+import Router from "./pages/Router";
 
 function App() {
   return (
-    <Container>
-      <h2>Welcome to React App!</h2>
-      <h3>Date : {new Date().toDateString()}</h3>
-    </Container>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
