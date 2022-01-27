@@ -1,5 +1,5 @@
 import { Route, Redirect, Switch } from "react-router-dom";
-import Navbar from "../components/molecules/navbar/Navbar";
+import Navbar from "~/components/molecules/navbar/Navbar";
 import Home from "./Home";
 import MyPokemon from "./MyPokemon";
 import NotFound from "./NotFound";
