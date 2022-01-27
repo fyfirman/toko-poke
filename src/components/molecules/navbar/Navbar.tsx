@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import Logo from "~/assets/images/logo.png";
+import BackIcon from "~/assets/images/chevron-back-outline.svg";
 
 const Container = styled.nav`
   display: flex;
@@ -11,7 +12,7 @@ const Container = styled.nav`
   height: 60px;
 `;
 
-const NavItem = styled(Link)<{ isHidden?: boolean }>`
+const NavItem = styled(Link, { shouldForwardProp: (props) => props !== "isHidden" })<{ isHidden?: boolean }>`
   min-width: 64px;
   visibility: ${({ isHidden }) => (isHidden ? "hidden" : "inherit")};
 `;
@@ -25,7 +26,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
   return (
     <Container>
       <NavItem isHidden={!canBack} to="/">
-        back
+        <img alt="Back Icon" src={BackIcon} />
       </NavItem>
       <NavItem to="/">
         <img alt="Toko Poke Logo" src={Logo} />
