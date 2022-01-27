@@ -58,3 +58,7 @@ input{
   -moz-box-shadow: none;
   box-shadow: none;  
 }
+html{
+	background-color: #171727;
+	padding-bottom: 2rem;
+}

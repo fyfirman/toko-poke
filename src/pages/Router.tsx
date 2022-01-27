@@ -7,8 +7,11 @@ import NotFound from "./NotFound";
 import PokemonDetail from "./pokemon-detail/PokemonDetail";
 
 const Container = styled.div`
-  background-color: ${({ theme }) => theme.color.mirage};
   min-height: 100vh;
+  @media only screen and (min-width: 600px) {
+    margin: auto;
+    max-width: 600px;
+  }
 `;
 
 /**

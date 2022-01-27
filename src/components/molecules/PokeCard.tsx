@@ -66,10 +66,11 @@ interface PokeCardProps extends IPokemon {
   onClick?: (pokemon: IPokemon) => void;
   withAction?: boolean;
   born?: Date | string;
+  onRelease?: () => void;
 }
 
 const PokeCard: React.FC<PokeCardProps> = (props) => {
-  const { name, pokemonName, id, types, imageUrl, onClick, withAction = false, born } = props;
+  const { name, pokemonName, id, types, imageUrl, onClick, withAction = false, born, onRelease } = props;
 
   const handleClick = useCallback(() => {
     if (onClick) {
@@ -98,7 +99,9 @@ const PokeCard: React.FC<PokeCardProps> = (props) => {
       </InfoSection>
       {withAction && (
         <ActionSection>
-          <IconButton imgSrc={TrashIcon}>Release</IconButton>
+          <IconButton imgSrc={TrashIcon} onClick={onRelease}>
+            Release
+          </IconButton>
         </ActionSection>
       )}
     </Container>

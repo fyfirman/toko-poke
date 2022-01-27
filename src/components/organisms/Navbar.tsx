@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Logo from "~/assets/images/logo.png";
 import BackIcon from "~/assets/images/chevron-back-outline.svg";
 import PokeIcon from "~/assets/images/poke-icon.svg";
@@ -36,14 +36,14 @@ interface NavbarProps {
   canBack?: boolean;
 }
 
-const Navbar: React.FC<NavbarProps> = (props) => {
-  const { canBack = false } = props;
-
+const Navbar: React.FC<NavbarProps> = () => {
   const [myPokemonList] = useMyPokemon();
+
+  const location = useLocation();
 
   return (
     <Container>
-      <NavItem isHidden={!canBack} to="/">
+      <NavItem isHidden={location.pathname === "/" || location.pathname === "/home"} to="/">
         <img alt="Back Icon" src={BackIcon} />
       </NavItem>
       <NavItem to="/">

@@ -1,10 +1,8 @@
-import React, { useCallback } from "react";
+import React from "react";
 import styled from "@emotion/styled";
-import { pokemonList } from "~/__mocks__/pokemon";
 import PokeCard from "~/components/molecules/PokeCard";
 import { getImageUrlByID } from "~/lib/pokemon";
-import { useHistory } from "react-router-dom";
-import { IPokemon } from "~/interfaces/Pokemon";
+import { IMyPokemon } from "~/interfaces/Pokemon";
 import { useMyPokemon } from "~/hooks/MyPokemonProvider";
 
 const PokemonContainer = styled.div`
@@ -22,16 +20,15 @@ const Header = styled.h1`
   margin-bottom: 1rem;
 `;
 
-interface MyPokemonProps {}
+const MyPokemon: React.FC = () => {
+  const [myPokemonList, dispatch] = useMyPokemon();
 
-const MyPokemon: React.FC<MyPokemonProps> = (props) => {
-  const history = useHistory();
-
-  const handleCardClick = useCallback((pokemon: IPokemon) => {
-    history.push(`/pokemon/${pokemon.pokemonName}`);
-  }, []);
-
-  const [myPokemonList] = useMyPokemon();
+  const handleRelease = (uuid: IMyPokemon["uuid"]) => {
+    dispatch({
+      type: "REMOVE",
+      payload: uuid,
+    });
+  };
 
   return (
     <div>
@@ -44,8 +41,9 @@ const MyPokemon: React.FC<MyPokemonProps> = (props) => {
             id={pokemon.id}
             imageUrl={getImageUrlByID(pokemon.id)}
             name={pokemon.name}
-            onClick={handleCardClick}
+            onRelease={() => handleRelease(pokemon.uuid)}
             pokemonName={pokemon.pokemonName}
+            withAction
           />
         ))}
       </PokemonContainer>

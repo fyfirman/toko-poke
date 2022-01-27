@@ -13,7 +13,7 @@ export const PokemonImage = styled.img`
 export const InfoSection = styled.div`
   padding: 1.5rem 1.5rem 50px;
   background-color: ${({ theme }) => theme.color.shark};
-  border-radius: 12px 12px 0 0;
+  border-radius: 12px;
   text-align: left;
 `;
 
