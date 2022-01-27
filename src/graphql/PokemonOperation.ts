@@ -1,13 +1,15 @@
-export const GET_LIST_POKEMON = `
-query samplePokeAPIquery {
-  pokemon_v2_pokemon(limit: 10, offset: 0) {
-    name
-    id
-    pokemon_v2_pokemontypes{
-      pokemon_v2_type{
+import { gql } from "@apollo/client";
+
+export const GET_POKEMON_LIST = gql`
+  query getPokemonList {
+    pokemons(limit: 10, offset: 0) {
+      results {
+        id
+        image
+        artwork
+        dreamworld
         name
       }
     }
   }
-}
 `;

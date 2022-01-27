@@ -18,9 +18,11 @@
     "test": "jest --watch"
   },
   "dependencies": {
+    "@apollo/client": "^3.5.8",
     "@emotion/css": "^11.7.1",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
+    "graphql": "^16.3.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-modal": "^3.14.4",
