@@ -23,7 +23,7 @@ const Router = () => {
           <Redirect to="/home" />
         </Route>
         <Route component={Home} path="/home" />
-        <Route component={PokemonDetail} path="/pokemon/:id" />
+        <Route component={PokemonDetail} path="/pokemon/:name" />
         <Route component={MyPokemon} path="/my-pokemon" />
         <Route component={NotFound} path="*" />
       </Switch>

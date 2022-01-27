@@ -12,14 +12,14 @@ const Container = styled.div`
 `;
 
 interface ChipListProps {
-  types: string[];
+  data: string[];
   color?: string;
 }
 
-const ChipList: React.FC<ChipListProps> = ({ types, color = theme.color.electricViolet }) => {
+const ChipList: React.FC<ChipListProps> = ({ data, color = theme.color.electricViolet }) => {
   return (
     <Container>
-      {types.map((type, index) => (
+      {data.map((type, index) => (
         <Chip key={index} color={color} rounded={false}>
           {type}
         </Chip>

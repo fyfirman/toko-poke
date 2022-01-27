@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { pokemonDetail } from "~/__mocks__/pokemon";
 import { getImageUrlByID } from "~/lib/pokemon";
 import ChipList from "~/components/molecules/ChipList";
 import uiTheme from "~/lib/theme";
 import SuccessModal from "~/components/templates/SuccessModal";
 import FailedModal from "~/components/templates/FailedModal";
+import { useQuery } from "@apollo/client";
+import { GET_POKEMON } from "~/graphql/PokemonOperation";
+import { useParams } from "react-router-dom";
+import { Query } from "~/interfaces/graphql";
 import {
   Container,
   PokemonImage,
@@ -20,34 +23,50 @@ import {
 type OpenedModal = "success" | "failed";
 
 const PokemonDetail: React.FC = () => {
+  const { name } = useParams<{ name: string }>();
   const [openedModal, setOpenedModal] = useState<OpenedModal>();
+  const { data, loading } = useQuery<Query>(GET_POKEMON, {
+    variables: { name },
+  });
 
   return (
     <>
       <Container>
-        <PokemonImage alt={pokemonDetail.name} src={getImageUrlByID(pokemonDetail.id, "official-artwork")} />
-        <InfoSection>
-          <HeaderSection>
-            <TitleText>{pokemonDetail.name}</TitleText>
-            <IdText>#{pokemonDetail.id}</IdText>
-          </HeaderSection>
-          <OwnedText>Owned: {10}</OwnedText>
-          <ChipList types={pokemonDetail.types.map((type) => type.type.name)} />
-          <MoveListText>Move List</MoveListText>
-          <ChipList color={uiTheme.color.boulder} types={pokemonDetail.moves.map((move) => move.move.name)} />
-        </InfoSection>
-        <GatchaButton onClick={() => setOpenedModal("failed")} />
+        {!loading ? (
+          <>
+            <PokemonImage
+              alt={data?.pokemon?.name as string}
+              src={getImageUrlByID(data?.pokemon?.id as number, "official-artwork")}
+            />
+            <InfoSection>
+              <HeaderSection>
+                <TitleText>{data?.pokemon?.name}</TitleText>
+                <IdText>#{data?.pokemon?.id}</IdText>
+              </HeaderSection>
+              <OwnedText>Owned: {10}</OwnedText>
+              <ChipList data={data?.pokemon?.types?.map((type) => type?.type?.name) as string[]} />
+              <MoveListText>Move List</MoveListText>
+              <ChipList
+                color={uiTheme.color.boulder}
+                data={data?.pokemon?.moves?.map((move) => move?.move?.name) as string[]}
+              />
+            </InfoSection>
+            <GatchaButton onClick={() => setOpenedModal("failed")} />
+          </>
+        ) : (
+          <div>Loading</div>
+        )}
       </Container>
       <SuccessModal
-        imgSrc={getImageUrlByID(pokemonDetail.id, "official-artwork")}
+        imgSrc={getImageUrlByID(data?.pokemon?.id as number, "official-artwork")}
         isOpen={openedModal === "success"}
         onRequestClose={() => setOpenedModal(undefined)}
-        pokemonName={pokemonDetail.name}
+        pokemonName={data?.pokemon?.name as string}
       />
       <FailedModal
         isOpen={openedModal === "failed"}
         onRequestClose={() => setOpenedModal(undefined)}
-        pokemonName={pokemonDetail.name}
+        pokemonName={data?.pokemon?.name as string}
       />
     </>
   );

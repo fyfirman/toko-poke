@@ -11,3 +11,21 @@ export const GET_POKEMON_LIST = gql`
     }
   }
 `;
+
+export const GET_POKEMON = gql`
+  query getPokemon($name: String!) {
+    pokemon(name: $name) {
+      id
+      moves {
+        move {
+          name
+        }
+      }
+      types {
+        type {
+          name
+        }
+      }
+    }
+  }
+`;

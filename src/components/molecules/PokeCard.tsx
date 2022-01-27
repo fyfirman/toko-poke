@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import styled from "@emotion/styled";
 import IconButton from "~/components/atoms/IconButton";
 import TrashIcon from "~/assets/images/trash-outline.svg";
+import { IPokemon } from "~/interfaces/pokemon";
 import TypeList from "./ChipList";
 
 const Container = styled.div`
@@ -51,13 +52,10 @@ const Image = styled.img`
   height: 80px;
 `;
 
-interface PokeCardProps {
-  pokemonName: string;
-  name?: string;
-  id: number;
+interface PokeCardProps extends IPokemon {
   types?: string[];
   imageUrl: string;
-  onClick?: (id: number) => void;
+  onClick?: (pokemon: IPokemon) => void;
   withAction?: boolean;
 }
 
@@ -65,8 +63,14 @@ const PokeCard: React.FC<PokeCardProps> = (props) => {
   const { name, pokemonName, id, types, imageUrl, onClick, withAction = false } = props;
 
   const handleClick = useCallback(() => {
-    if (onClick) onClick(id);
-  }, [id, onClick]);
+    if (onClick) {
+      onClick({
+        id,
+        pokemonName,
+        name,
+      });
+    }
+  }, [id, name, onClick, pokemonName]);
 
   return (
     <Container onClick={handleClick}>
@@ -74,7 +78,7 @@ const PokeCard: React.FC<PokeCardProps> = (props) => {
         <Body>
           <Name>{name ? `${name} - ${pokemonName}` : pokemonName}</Name>
           <Id>#{id}</Id>
-          {types && <TypeList types={types} />}
+          {types && <TypeList data={types} />}
         </Body>
         <Image alt={name} src={imageUrl} />
       </InfoSection>

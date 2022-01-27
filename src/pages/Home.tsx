@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_POKEMON_LIST } from "~/graphql/PokemonOperation";
 import { Query } from "~/interfaces/graphql";
+import { IPokemon } from "~/interfaces/pokemon";
 
 const Container = styled.div`
   background-color: "red";
@@ -19,8 +20,8 @@ const Home: React.FC = () => {
   const history = useHistory();
   const { data } = useQuery<Query>(GET_POKEMON_LIST);
 
-  const handleCardClick = useCallback((id: number) => {
-    history.push(`/pokemon/${id}`);
+  const handleCardClick = useCallback((pokemon: IPokemon) => {
+    history.push(`/pokemon/${pokemon.pokemonName}`);
   }, []);
 
   return (
