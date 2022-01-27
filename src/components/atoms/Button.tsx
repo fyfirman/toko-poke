@@ -16,11 +16,12 @@ interface ButtonProps {
   children: string;
   color?: string;
   className?: string;
+  onClick?: () => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ children, color, className }) => {
+const Button: React.FC<ButtonProps> = ({ children, color, className, onClick }) => {
   return (
-    <Container className={className} color={color}>
+    <Container className={className} color={color} onClick={onClick}>
       {children}
     </Container>
   );

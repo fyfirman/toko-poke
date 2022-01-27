@@ -4,7 +4,7 @@ import PokeBall from "~/assets/images/poke-ball.svg";
 
 const Container = styled.button<{ color?: string }>`
   padding: 20px;
-  background-color: ${({ theme }) => theme.color.electricViolet};
+  background-color: ${({ theme }) => theme.color.amethyst};
   border-radius: 100%;
 `;
 
