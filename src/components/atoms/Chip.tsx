@@ -6,7 +6,7 @@ const Container = styled.span<{ color?: string; rounded?: boolean }>`
   color: white;
   background-color: ${({ theme, color }) => color ?? theme.color.cinnabar};
   border-radius: ${({ rounded }) => (rounded ? "100%" : "8px")};
-  padding: 8px;
+  padding: ${({ rounded }) => (rounded ? "8px" : "6px 8px")};
 `;
 
 interface ChipProps {

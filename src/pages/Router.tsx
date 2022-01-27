@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Route, Redirect, Switch } from "react-router-dom";
-import Navbar from "~/components/molecules/navbar/Navbar";
+import Navbar from "~/components/organisms/Navbar";
 import Home from "./Home";
 import MyPokemon from "./MyPokemon";
 import NotFound from "./NotFound";
@@ -8,7 +8,6 @@ import PokemonDetail from "./PokemonDetail";
 
 const Container = styled.div`
   background-color: ${({ theme }) => theme.color.mirage};
-  min-height: 100vh;
 `;
 
 /**

@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import styled from "@emotion/styled";
-import uiTheme from "~/lib/theme";
-import Chip from "../atoms/Chip";
+import TypeList from "./ChipList";
 
 const Container = styled.div`
   background-color: ${({ theme }) => theme.color.shark};
@@ -26,13 +25,6 @@ const Id = styled.span`
   font-weight: bold;
   font-size: 1.125rem;
   color: ${({ theme }) => theme.color.silverChalice};
-`;
-
-const TypesContainer = styled.div`
-  margin-top: 0.5rem;
-  display: flex;
-  gap: 0.5rem;
-  text-transform: capitalize;
 `;
 
 const InfoSection = styled.div`
@@ -66,13 +58,7 @@ const PokeCard: React.FC<PokeCardProps> = (props) => {
       <InfoSection>
         <Name>{name}</Name>
         <Id>#{id}</Id>
-        <TypesContainer>
-          {types.map((type, index) => (
-            <Chip key={index} color={uiTheme.color.electricViolet} rounded={false}>
-              {type}
-            </Chip>
-          ))}
-        </TypesContainer>
+        <TypeList types={types} />
       </InfoSection>
       <Image alt={name} src={imageUrl} />
     </Container>
