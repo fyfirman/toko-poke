@@ -3,7 +3,9 @@ import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import Logo from "~/assets/images/logo.png";
 import BackIcon from "~/assets/images/chevron-back-outline.svg";
+import PokeIcon from "~/assets/images/poke-icon.svg";
 import Chip from "~/components/atoms/Chip";
+import { useMyPokemon } from "~/hooks/MyPokemonProvider";
 
 const Container = styled.nav`
   display: flex;
@@ -20,12 +22,25 @@ const NavItem = styled(Link, { shouldForwardProp: (props) => props !== "isHidden
   display: flex;
 `;
 
+const MyPokemonContainer = styled.div`
+  position: relative;
+
+  & > span {
+    position: absolute;
+    right: -6px;
+    bottom: -4px;
+  }
+`;
+
 interface NavbarProps {
   canBack?: boolean;
 }
 
 const Navbar: React.FC<NavbarProps> = (props) => {
   const { canBack = false } = props;
+
+  const [myPokemonList] = useMyPokemon();
+
   return (
     <Container>
       <NavItem isHidden={!canBack} to="/">
@@ -35,7 +50,10 @@ const Navbar: React.FC<NavbarProps> = (props) => {
         <img alt="Toko Poke Logo" src={Logo} />
       </NavItem>
       <NavItem to="/my-pokemon">
-        <Chip>10</Chip>
+        <MyPokemonContainer>
+          <img alt="My Pokemon Icon" src={PokeIcon} width={30} />
+          <Chip>{myPokemonList.length}</Chip>
+        </MyPokemonContainer>
       </NavItem>
     </Container>
   );

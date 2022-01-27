@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import IconButton from "~/components/atoms/IconButton";
 import TrashIcon from "~/assets/images/trash-outline.svg";
 import { IPokemon } from "~/interfaces/Pokemon";
+import { format } from "fecha";
 import TypeList from "./ChipList";
 
 const Container = styled.div`
@@ -48,6 +49,13 @@ const Body = styled.div`
   justify-content: space-between;
 `;
 
+const Born = styled.span`
+  font-family: Raleway;
+  font-style: normal;
+  font-size: 0.875rem;
+  color: ${({ theme }) => theme.color.silverChalice};
+`;
+
 const Image = styled.img`
   height: 80px;
 `;
@@ -57,10 +65,11 @@ interface PokeCardProps extends IPokemon {
   imageUrl: string;
   onClick?: (pokemon: IPokemon) => void;
   withAction?: boolean;
+  born?: Date | string;
 }
 
 const PokeCard: React.FC<PokeCardProps> = (props) => {
-  const { name, pokemonName, id, types, imageUrl, onClick, withAction = false } = props;
+  const { name, pokemonName, id, types, imageUrl, onClick, withAction = false, born } = props;
 
   const handleClick = useCallback(() => {
     if (onClick) {
@@ -78,6 +87,11 @@ const PokeCard: React.FC<PokeCardProps> = (props) => {
         <Body>
           <Name>{name ? `${name} - ${pokemonName}` : pokemonName}</Name>
           <Id>#{id}</Id>
+          {born && (
+            <Born>
+              Born : {typeof born === "string" ? format(new Date(born), "DD MMM 'YY") : format(born, "DD Mm 'YY")}
+            </Born>
+          )}
           {types && <TypeList data={types} />}
         </Body>
         <Image alt={name} src={imageUrl} />

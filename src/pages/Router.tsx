@@ -8,6 +8,7 @@ import PokemonDetail from "./pokemon-detail/PokemonDetail";
 
 const Container = styled.div`
   background-color: ${({ theme }) => theme.color.mirage};
+  min-height: 100vh;
 `;
 
 /**

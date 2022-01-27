@@ -9,7 +9,11 @@ export type MyPokemonAction = {
   payload: any;
 };
 
-const addPokemon = (pokemonList: IMyPokemon[], newPokemon: IPokemon) => {
+export interface NewPokemonPayload extends IPokemon {
+  name: string;
+}
+
+const addPokemon = (pokemonList: IMyPokemon[], newPokemon: NewPokemonPayload) => {
   const newPokemonList: IMyPokemon[] = [...pokemonList, { ...newPokemon, uuid: generateUUID(), born: new Date() }];
   localStorage.setItem(LocalStorageKey.MY_POKEMON_LIST, JSON.stringify(newPokemonList));
   return newPokemonList;
@@ -24,7 +28,7 @@ const deletePokemon = (pokemonList: IMyPokemon[], pokemonUuid: IMyPokemon["uuid"
 const myPokemonReducer = (state: IMyPokemon[], action: MyPokemonAction) => {
   switch (action.type) {
     case "ADD":
-      return addPokemon(state, action.payload as IPokemon);
+      return addPokemon(state, action.payload as NewPokemonPayload);
     case "REMOVE":
       return deletePokemon(state, action.payload as IMyPokemon["uuid"]);
     default:

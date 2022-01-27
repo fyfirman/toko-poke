@@ -4,7 +4,8 @@ export interface IPokemon {
   id: number;
 }
 
-export interface IMyPokemon extends IPokemon {
+export interface IMyPokemon extends Omit<IPokemon, "name"> {
   uuid: string;
   born: Date;
+  name: string;
 }

@@ -5,6 +5,7 @@ import PokeCard from "~/components/molecules/PokeCard";
 import { getImageUrlByID } from "~/lib/pokemon";
 import { useHistory } from "react-router-dom";
 import { IPokemon } from "~/interfaces/Pokemon";
+import { useMyPokemon } from "~/hooks/MyPokemonProvider";
 
 const PokemonContainer = styled.div`
   background-color: "red";
@@ -29,17 +30,22 @@ const MyPokemon: React.FC<MyPokemonProps> = (props) => {
   const handleCardClick = useCallback((pokemon: IPokemon) => {
     history.push(`/pokemon/${pokemon.pokemonName}`);
   }, []);
+
+  const [myPokemonList] = useMyPokemon();
+
   return (
     <div>
       <Header>My Pokemon</Header>
       <PokemonContainer>
-        {pokemonList.map((pokemon) => (
+        {myPokemonList.map((pokemon) => (
           <PokeCard
-            key={pokemon.id}
+            key={pokemon.uuid}
+            born={pokemon.born}
             id={pokemon.id}
             imageUrl={getImageUrlByID(pokemon.id)}
+            name={pokemon.name}
             onClick={handleCardClick}
-            pokemonName={pokemon.name}
+            pokemonName={pokemon.pokemonName}
           />
         ))}
       </PokemonContainer>

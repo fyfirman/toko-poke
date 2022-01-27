@@ -18,7 +18,7 @@ const Container = styled.div`
 
 const Home: React.FC = () => {
   const history = useHistory();
-  const { data } = useQuery<Query>(GET_POKEMON_LIST);
+  const { data, loading } = useQuery<Query>(GET_POKEMON_LIST);
 
   const handleCardClick = useCallback((pokemon: IPokemon) => {
     history.push(`/pokemon/${pokemon.pokemonName}`);
@@ -26,15 +26,19 @@ const Home: React.FC = () => {
 
   return (
     <Container>
-      {data?.pokemons?.results?.map((pokemon) => (
-        <PokeCard
-          key={pokemon?.id}
-          id={pokemon?.id as number}
-          imageUrl={pokemon?.image as string}
-          onClick={handleCardClick}
-          pokemonName={pokemon?.name as string}
-        />
-      ))}
+      {!loading ? (
+        data?.pokemons?.results?.map((pokemon) => (
+          <PokeCard
+            key={pokemon?.id}
+            id={pokemon?.id as number}
+            imageUrl={pokemon?.image as string}
+            onClick={handleCardClick}
+            pokemonName={pokemon?.name as string}
+          />
+        ))
+      ) : (
+        <div>loading</div>
+      )}
     </Container>
   );
 };
