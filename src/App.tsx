@@ -2,7 +2,7 @@ import { ThemeProvider } from "@emotion/react";
 import { BrowserRouter } from "react-router-dom";
 import theme from "./lib/theme";
 import Router from "./pages/Router";
-import "~/lib/css-reset.css";
+import "~/styles/global.css";
 
 function App() {
   return (
