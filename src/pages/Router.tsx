@@ -4,7 +4,7 @@ import Navbar from "~/components/organisms/Navbar";
 import Home from "./Home";
 import MyPokemon from "./MyPokemon";
 import NotFound from "./NotFound";
-import PokemonDetail from "./PokemonDetail";
+import PokemonDetail from "./pokemon-detail/PokemonDetail";
 
 const Container = styled.div`
   background-color: ${({ theme }) => theme.color.mirage};
