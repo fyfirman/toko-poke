@@ -6,6 +6,8 @@ const Container = styled.span<{ color?: string }>`
   color: white;
   background-color: ${({ theme, color }) => color ?? theme.color.cinnabar};
   border-radius: 100%;
+  padding: 8px;
+  aspect-ratio: 1;
 `;
 
 interface ChipProps {

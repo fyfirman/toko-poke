@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import Logo from "~/assets/images/logo.png";
 import BackIcon from "~/assets/images/chevron-back-outline.svg";
+import Chip from "~/components/atoms/Chip";
 
 const Container = styled.nav`
   display: flex;
@@ -15,6 +16,8 @@ const Container = styled.nav`
 const NavItem = styled(Link, { shouldForwardProp: (props) => props !== "isHidden" })<{ isHidden?: boolean }>`
   min-width: 64px;
   visibility: ${({ isHidden }) => (isHidden ? "hidden" : "inherit")};
+  justify-content: center;
+  display: flex;
 `;
 
 interface NavbarProps {
@@ -31,7 +34,9 @@ const Navbar: React.FC<NavbarProps> = (props) => {
       <NavItem to="/">
         <img alt="Toko Poke Logo" src={Logo} />
       </NavItem>
-      <NavItem to="/my-pokemon">Item Count</NavItem>
+      <NavItem to="/my-pokemon">
+        <Chip>10</Chip>
+      </NavItem>
     </Container>
   );
 };
