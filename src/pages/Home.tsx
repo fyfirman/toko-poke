@@ -1,9 +1,10 @@
 import React, { useCallback } from "react";
 import styled from "@emotion/styled";
-import { pokemonList } from "~/__mocks__/pokemon";
 import PokeCard from "~/components/molecules/PokeCard";
-import { getImageUrlByID } from "~/lib/pokemon";
 import { useHistory } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { GET_POKEMON_LIST } from "~/graphql/PokemonOperation";
+import { Query } from "~/interfaces/graphql";
 
 const Container = styled.div`
   background-color: "red";
@@ -14,10 +15,9 @@ const Container = styled.div`
   }
 `;
 
-interface HomeProps {}
-
-const Home: React.FC<HomeProps> = (props) => {
+const Home: React.FC = () => {
   const history = useHistory();
+  const { data } = useQuery<Query>(GET_POKEMON_LIST);
 
   const handleCardClick = useCallback((id: number) => {
     history.push(`/pokemon/${id}`);
@@ -25,14 +25,13 @@ const Home: React.FC<HomeProps> = (props) => {
 
   return (
     <Container>
-      {pokemonList.map((pokemon) => (
+      {data?.pokemons?.results?.map((pokemon) => (
         <PokeCard
-          key={pokemon.id}
-          id={pokemon.id}
-          imageUrl={getImageUrlByID(pokemon.id)}
+          key={pokemon?.id}
+          id={pokemon?.id as number}
+          imageUrl={pokemon?.image as string}
           onClick={handleCardClick}
-          pokemonName={pokemon.name}
-          types={pokemon.pokemon_v2_pokemontypes.map((type) => type.pokemon_v2_type.name)}
+          pokemonName={pokemon?.name as string}
         />
       ))}
     </Container>

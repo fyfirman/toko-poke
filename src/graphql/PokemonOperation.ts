@@ -6,8 +6,6 @@ export const GET_POKEMON_LIST = gql`
       results {
         id
         image
-        artwork
-        dreamworld
         name
       }
     }

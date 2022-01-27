@@ -55,7 +55,7 @@ interface PokeCardProps {
   pokemonName: string;
   name?: string;
   id: number;
-  types: string[];
+  types?: string[];
   imageUrl: string;
   onClick?: (id: number) => void;
   withAction?: boolean;
@@ -74,7 +74,7 @@ const PokeCard: React.FC<PokeCardProps> = (props) => {
         <Body>
           <Name>{name ? `${name} - ${pokemonName}` : pokemonName}</Name>
           <Id>#{id}</Id>
-          <TypeList types={types} />
+          {types && <TypeList types={types} />}
         </Body>
         <Image alt={name} src={imageUrl} />
       </InfoSection>
