@@ -5,14 +5,17 @@ import theme from "./lib/theme";
 import Router from "./pages/Router";
 import "~/styles/global.css";
 import apolloClient from "./lib/ApolloClient";
+import { MyPokemonProvider } from "./hooks/MyPokemonProvider";
 
 function App() {
   return (
     <ApolloProvider client={apolloClient}>
       <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <Router />
-        </BrowserRouter>
+        <MyPokemonProvider>
+          <BrowserRouter>
+            <Router />
+          </BrowserRouter>
+        </MyPokemonProvider>
       </ThemeProvider>
     </ApolloProvider>
   );

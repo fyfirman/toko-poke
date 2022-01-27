@@ -3,3 +3,8 @@ export interface IPokemon {
   name?: string;
   id: number;
 }
+
+export interface IMyPokemon extends IPokemon {
+  uuid: string;
+  born: Date;
+}

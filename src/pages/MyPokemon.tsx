@@ -4,7 +4,7 @@ import { pokemonList } from "~/__mocks__/pokemon";
 import PokeCard from "~/components/molecules/PokeCard";
 import { getImageUrlByID } from "~/lib/pokemon";
 import { useHistory } from "react-router-dom";
-import { IPokemon } from "~/interfaces/pokemon";
+import { IPokemon } from "~/interfaces/Pokemon";
 
 const PokemonContainer = styled.div`
   background-color: "red";

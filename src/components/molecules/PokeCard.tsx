@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import styled from "@emotion/styled";
 import IconButton from "~/components/atoms/IconButton";
 import TrashIcon from "~/assets/images/trash-outline.svg";
-import { IPokemon } from "~/interfaces/pokemon";
+import { IPokemon } from "~/interfaces/Pokemon";
 import TypeList from "./ChipList";
 
 const Container = styled.div`

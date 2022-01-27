@@ -19,16 +19,17 @@ const Field = styled.input`
   border-radius: 8px;
 `;
 
-interface InputProps {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
   className?: string;
+  label: string;
 }
 
-const Input: React.FC<InputProps> = ({ name, className }) => {
+const Input: React.FC<InputProps> = ({ name, label, className, ...rest }) => {
   return (
     <Container className={className}>
-      <Label htmlFor={name}>Please give it a name</Label>
-      <Field name={name} type="text" />
+      <Label htmlFor={name}>{label}</Label>
+      <Field name={name} type="text" {...rest} />
     </Container>
   );
 };

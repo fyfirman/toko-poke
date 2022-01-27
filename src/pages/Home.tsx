@@ -4,8 +4,8 @@ import PokeCard from "~/components/molecules/PokeCard";
 import { useHistory } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_POKEMON_LIST } from "~/graphql/PokemonOperation";
-import { Query } from "~/interfaces/graphql";
-import { IPokemon } from "~/interfaces/pokemon";
+import { Query } from "~/interfaces/Graphql";
+import { IPokemon } from "~/interfaces/Pokemon";
 
 const Container = styled.div`
   background-color: "red";

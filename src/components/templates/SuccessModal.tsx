@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import styled from "@emotion/styled";
 import Modal from "react-modal";
 import { modalStyles } from "~/styles/ModalStyle";
@@ -25,10 +25,20 @@ const NameInput = styled(Input)`
 interface SuccessModalProps extends ReactModal.Props {
   pokemonName: string;
   imgSrc: string;
+  onSavePokemon?: (name: string) => void;
 }
 
 const SuccessModal: React.FC<SuccessModalProps> = (props) => {
-  const { pokemonName, imgSrc, ...rest } = props;
+  const { pokemonName, imgSrc, onSavePokemon, ...rest } = props;
+
+  const [name, setName] = useState("");
+
+  const handleSavePokemon = useCallback(() => {
+    if (onSavePokemon) {
+      onSavePokemon(name);
+    }
+  }, [name, onSavePokemon]);
+
   return (
     <Modal contentLabel="Success" style={modalStyles} {...rest}>
       <Image alt={pokemonName} src={imgSrc} />
@@ -36,8 +46,8 @@ const SuccessModal: React.FC<SuccessModalProps> = (props) => {
         You got <span>{pokemonName}</span>!
       </Header>
       <form>
-        <NameInput name="name" />
-        <Button>Save</Button>
+        <NameInput label="Please give it a name" name="name" onChange={(e) => setName(e.target.value)} />
+        <Button onClick={handleSavePokemon}>Save</Button>
       </form>
     </Modal>
   );

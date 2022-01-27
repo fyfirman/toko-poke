@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { getImageUrlByID } from "~/lib/pokemon";
 import ChipList from "~/components/molecules/ChipList";
 import uiTheme from "~/lib/theme";
@@ -7,7 +7,9 @@ import FailedModal from "~/components/templates/FailedModal";
 import { useQuery } from "@apollo/client";
 import { GET_POKEMON } from "~/graphql/PokemonOperation";
 import { useParams } from "react-router-dom";
-import { Query } from "~/interfaces/graphql";
+import { Query } from "~/interfaces/Graphql";
+import { useMyPokemon } from "~/hooks/MyPokemonProvider";
+import { IPokemon } from "~/interfaces/Pokemon";
 import {
   Container,
   PokemonImage,
@@ -28,6 +30,24 @@ const PokemonDetail: React.FC = () => {
   const { data, loading } = useQuery<Query>(GET_POKEMON, {
     variables: { name },
   });
+  const [_, dispatch] = useMyPokemon();
+
+  const handleGatcha = () => {
+    console.log(Math.random());
+    setOpenedModal(Math.random() >= 0.5 ? "success" : "failed");
+  };
+
+  const handleSavePokemon = (petName: string) => {
+    if (!petName || !data?.pokemon?.id || !data.pokemon.name) {
+      return;
+    }
+    const newPokemon: IPokemon = {
+      id: data.pokemon.id,
+      pokemonName: data.pokemon.name,
+      name: petName,
+    };
+    dispatch({ type: "ADD", payload: newPokemon });
+  };
 
   return (
     <>
@@ -51,7 +71,7 @@ const PokemonDetail: React.FC = () => {
                 data={data?.pokemon?.moves?.map((move) => move?.move?.name) as string[]}
               />
             </InfoSection>
-            <GatchaButton onClick={() => setOpenedModal("failed")} />
+            <GatchaButton onClick={handleGatcha} />
           </>
         ) : (
           <div>Loading</div>
@@ -61,6 +81,7 @@ const PokemonDetail: React.FC = () => {
         imgSrc={getImageUrlByID(data?.pokemon?.id as number, "official-artwork")}
         isOpen={openedModal === "success"}
         onRequestClose={() => setOpenedModal(undefined)}
+        onSavePokemon={handleSavePokemon}
         pokemonName={data?.pokemon?.name as string}
       />
       <FailedModal
