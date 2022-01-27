@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback } from "react";
 import styled from "@emotion/styled";
 import PokeCard from "~/components/molecules/PokeCard";
 import { useHistory } from "react-router-dom";

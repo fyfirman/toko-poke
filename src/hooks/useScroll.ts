@@ -30,7 +30,7 @@ const useScroll = (
         observer.unobserve(observerRefValue);
       }
     };
-  }, [callback]);
+  }, [callback, options]);
 
   return { intersectionAreaRef };
 };

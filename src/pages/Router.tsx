@@ -3,7 +3,6 @@ import { Route, Redirect, Switch } from "react-router-dom";
 import Navbar from "~/components/organisms/Navbar";
 import Home from "./Home";
 import MyPokemon from "./MyPokemon";
-import NotFound from "./NotFound";
 import PokemonDetail from "./pokemon-detail/PokemonDetail";
 
 const Container = styled.div`
@@ -29,7 +28,9 @@ const Router = () => {
         <Route component={Home} path="/home" />
         <Route component={PokemonDetail} path="/pokemon/:name" />
         <Route component={MyPokemon} path="/my-pokemon" />
-        <Route component={NotFound} path="*" />
+        <Route path="*">
+          <Redirect to="/home" />
+        </Route>
       </Switch>
     </Container>
   );

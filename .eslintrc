@@ -37,7 +37,8 @@
     "no-negated-condition": "off",
     "@typescript-eslint/prefer-nullish-coalescing": "off",
     "testing-library/no-container": "off",
-    "testing-library/no-node-access": "off"
+    "testing-library/no-node-access": "off",
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }]
   },
   "settings": {
     "import/resolver": {
@@ -73,5 +74,5 @@
       }
     }
   ],
-  "ignorePatterns": ["public/**/*.js"]
+  "ignorePatterns": ["public/**/*.js", "jest.setup.ts"]
 }

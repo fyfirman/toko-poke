@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import { getImageUrlByID } from "~/lib/pokemon";
 import ChipList from "~/components/molecules/ChipList";
 import uiTheme from "~/lib/theme";
@@ -33,7 +33,6 @@ const PokemonDetail: React.FC = () => {
   const [_, dispatch] = useMyPokemon();
 
   const handleGatcha = () => {
-    console.log(Math.random());
     setOpenedModal(Math.random() >= 0.5 ? "success" : "failed");
   };
 

@@ -4,7 +4,6 @@ import Modal from "react-modal";
 import { modalStyles } from "~/styles/ModalStyle";
 import CryingPikachu from "~/assets/images/crying-pikachu.jpg";
 import Button from "../atoms/Button";
-import Input from "../molecules/Input";
 
 const Header = styled.h1`
   font-size: 1.5rem;
@@ -26,6 +25,7 @@ interface FailedModalProps extends Modal.Props {
 }
 
 const FailedModal: React.FC<FailedModalProps> = (props) => {
+  // eslint-disable-next-line @typescript-eslint/unbound-method
   const { pokemonName, onRequestClose, ...rest } = props;
   return (
     <Modal contentLabel="Success" onRequestClose={onRequestClose} style={modalStyles} {...rest}>
