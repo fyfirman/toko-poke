@@ -13,6 +13,7 @@ declare module "@emotion/react" {
       cinnabar: string;
       mulberry: string;
       tuna: string;
+      alto: string;
     };
   }
 }

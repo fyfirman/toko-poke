@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import PokeBall from "~/assets/images/poke-ball.svg";
 
-const Container = styled.button`
+const Container = styled.button<{ color?: string }>`
   padding: 20px;
   background-color: ${({ theme }) => theme.color.electricViolet};
   border-radius: 100%;

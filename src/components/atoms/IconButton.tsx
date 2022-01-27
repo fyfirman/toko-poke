@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 
-const Container = styled.button`
+const Container = styled.button<{ color?: string }>`
   display: flex;
   gap: 0.25rem;
   background-color: ${({ theme, color }) => color ?? theme.color.cinnabar};
@@ -16,7 +16,7 @@ const Text = styled.span`
 `;
 
 interface IconButtonProps {
-  children: string | number;
+  children: string;
   color?: string;
   className?: string;
   imgSrc: string;

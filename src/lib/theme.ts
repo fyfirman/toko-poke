@@ -12,6 +12,7 @@ const theme: Theme = {
     cinnabar: "#E13838",
     mulberry: "#CA456D",
     tuna: "#333640",
+    alto: "#D1D1D1",
   },
 };
 

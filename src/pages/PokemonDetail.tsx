@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { pokemonDetail } from "~/__mocks__/pokemon";
 import { getImageUrlByID } from "~/lib/pokemon";
 import ChipList from "~/components/molecules/ChipList";
 import uiTheme from "~/lib/theme";
 import PokeButton from "~/components/atoms/PokeButton";
+import SuccessModal from "~/components/templates/SuccessModal";
 
 const Container = styled.div`
   text-align: center;
@@ -57,22 +58,34 @@ const GatchaButton = styled(PokeButton)`
 
 interface PokemonDetailProps {}
 
+type OpenedModal = "success" | "failed";
+
 const PokemonDetail: React.FC<PokemonDetailProps> = (props) => {
+  const [openedModal, setOpenedModal] = useState<OpenedModal>();
+
   return (
-    <Container>
-      <PokemonImage alt={pokemonDetail.name} src={getImageUrlByID(pokemonDetail.id, "official-artwork")} />
-      <InfoSection>
-        <HeaderSection>
-          <TitleText>{pokemonDetail.name}</TitleText>
-          <IdText>#{pokemonDetail.id}</IdText>
-        </HeaderSection>
-        <OwnedText>Owned: {10}</OwnedText>
-        <ChipList types={pokemonDetail.types.map((type) => type.type.name)} />
-        <MoveListText>Move List</MoveListText>
-        <ChipList color={uiTheme.color.boulder} types={pokemonDetail.moves.map((move) => move.move.name)} />
-      </InfoSection>
-      <GatchaButton />
-    </Container>
+    <>
+      <Container>
+        <PokemonImage alt={pokemonDetail.name} src={getImageUrlByID(pokemonDetail.id, "official-artwork")} />
+        <InfoSection>
+          <HeaderSection>
+            <TitleText>{pokemonDetail.name}</TitleText>
+            <IdText>#{pokemonDetail.id}</IdText>
+          </HeaderSection>
+          <OwnedText>Owned: {10}</OwnedText>
+          <ChipList types={pokemonDetail.types.map((type) => type.type.name)} />
+          <MoveListText>Move List</MoveListText>
+          <ChipList color={uiTheme.color.boulder} types={pokemonDetail.moves.map((move) => move.move.name)} />
+        </InfoSection>
+        <GatchaButton onClick={() => setOpenedModal("success")} />
+      </Container>
+      <SuccessModal
+        imgSrc={getImageUrlByID(pokemonDetail.id, "official-artwork")}
+        isOpen={openedModal === "success"}
+        onRequestClose={() => setOpenedModal(undefined)}
+        pokemonName={pokemonDetail.name}
+      />
+    </>
   );
 };
 
