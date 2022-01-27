@@ -1,13 +1,13 @@
 import React, { useCallback } from "react";
 import styled from "@emotion/styled";
+import IconButton from "~/components/atoms/IconButton";
+import TrashIcon from "~/assets/images/trash-outline.svg";
 import TypeList from "./ChipList";
 
 const Container = styled.div`
   background-color: ${({ theme }) => theme.color.shark};
   border-radius: 12px;
   padding: 1rem;
-  display: flex;
-  flex-wrap: none;
 `;
 
 const Name = styled.span`
@@ -29,6 +29,19 @@ const Id = styled.span`
 
 const InfoSection = styled.div`
   display: flex;
+  flex-wrap: none;
+`;
+
+const ActionSection = styled.div`
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const Body = styled.div`
+  display: flex;
   flex-direction: column;
   flex: 1;
   justify-content: space-between;
@@ -39,15 +52,17 @@ const Image = styled.img`
 `;
 
 interface PokeCardProps {
-  name: string;
+  pokemonName: string;
+  name?: string;
   id: number;
   types: string[];
   imageUrl: string;
   onClick?: (id: number) => void;
+  withAction?: boolean;
 }
 
 const PokeCard: React.FC<PokeCardProps> = (props) => {
-  const { name, id, types, imageUrl, onClick } = props;
+  const { name, pokemonName, id, types, imageUrl, onClick, withAction = false } = props;
 
   const handleClick = useCallback(() => {
     if (onClick) onClick(id);
@@ -56,11 +71,18 @@ const PokeCard: React.FC<PokeCardProps> = (props) => {
   return (
     <Container onClick={handleClick}>
       <InfoSection>
-        <Name>{name}</Name>
-        <Id>#{id}</Id>
-        <TypeList types={types} />
+        <Body>
+          <Name>{name ? `${name} - ${pokemonName}` : pokemonName}</Name>
+          <Id>#{id}</Id>
+          <TypeList types={types} />
+        </Body>
+        <Image alt={name} src={imageUrl} />
       </InfoSection>
-      <Image alt={name} src={imageUrl} />
+      {withAction && (
+        <ActionSection>
+          <IconButton imgSrc={TrashIcon}>Release</IconButton>
+        </ActionSection>
+      )}
     </Container>
   );
 };

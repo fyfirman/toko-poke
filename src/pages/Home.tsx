@@ -30,8 +30,8 @@ const Home: React.FC<HomeProps> = (props) => {
           key={pokemon.id}
           id={pokemon.id}
           imageUrl={getImageUrlByID(pokemon.id)}
-          name={pokemon.name}
           onClick={handleCardClick}
+          pokemonName={pokemon.name}
           types={pokemon.pokemon_v2_pokemontypes.map((type) => type.pokemon_v2_type.name)}
         />
       ))}
