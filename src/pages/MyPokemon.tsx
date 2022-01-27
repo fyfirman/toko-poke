@@ -17,6 +17,7 @@ const PokemonContainer = styled.div`
 const Header = styled.h1`
   font-size: 1.125rem;
   margin-left: 1rem;
+  margin-bottom: 1rem;
 `;
 
 interface MyPokemonProps {}
