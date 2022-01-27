@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "@emotion/styled";
 import { pokemonList } from "~/__mocks__/pokemon";
 import PokeCard from "~/components/molecules/PokeCard";
 import { getImageUrlByID } from "~/lib/pokemon";
+import { useHistory } from "react-router-dom";
 
 const Container = styled.div`
   background-color: "red";
@@ -16,6 +17,12 @@ const Container = styled.div`
 interface HomeProps {}
 
 const Home: React.FC<HomeProps> = (props) => {
+  const history = useHistory();
+
+  const handleCardClick = useCallback((id: number) => {
+    history.push(`/pokemon/${id}`);
+  }, []);
+
   return (
     <Container>
       {pokemonList.map((pokemon) => (
@@ -24,6 +31,7 @@ const Home: React.FC<HomeProps> = (props) => {
           id={pokemon.id}
           imageUrl={getImageUrlByID(pokemon.id)}
           name={pokemon.name}
+          onClick={handleCardClick}
           types={pokemon.pokemon_v2_pokemontypes.map((type) => type.pokemon_v2_type.name)}
         />
       ))}
@@ -31,4 +39,4 @@ const Home: React.FC<HomeProps> = (props) => {
   );
 };
 
-export default Home;
+export default React.memo(Home);
