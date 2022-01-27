@@ -1,12 +1,17 @@
 import React from "react";
 import styled from "@emotion/styled";
+import { Link } from "react-router-dom";
+import Logo from "~/assets/images/logo.png";
 
 const Container = styled.nav`
   display: flex;
-  align-items: space-between;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 60px;
 `;
 
-const NavItem = styled.div<{ isHidden?: boolean }>`
+const NavItem = styled(Link)<{ isHidden?: boolean }>`
   min-width: 64px;
   visibility: ${({ isHidden }) => (isHidden ? "hidden" : "inherit")};
 `;
@@ -19,9 +24,13 @@ const Navbar: React.FC<NavbarProps> = (props) => {
   const { canBack = false } = props;
   return (
     <Container>
-      <NavItem isHidden={!canBack}>back</NavItem>
-      <NavItem>logo</NavItem>
-      <NavItem>Item Count</NavItem>
+      <NavItem isHidden={!canBack} to="/">
+        back
+      </NavItem>
+      <NavItem to="/">
+        <img alt="Toko Poke Logo" src={Logo} />
+      </NavItem>
+      <NavItem to="/my-pokemon">Item Count</NavItem>
     </Container>
   );
 };
