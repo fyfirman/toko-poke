@@ -13,6 +13,7 @@ export const modalStyles: ReactModal.Styles = {
     borderWidth: 0,
     textAlign: "center",
     padding: "1.875rem 1rem 3rem",
+    maxWidth: "580px",
   },
   overlay: {
     backgroundColor: "#000000AA",
