@@ -11,6 +11,7 @@
   "author": "fyfirman",
   "main": "index.js",
   "scripts": {
+    "clean": "rm -rf dist/*",
     "build": "webpack --mode production",
     "dev": "webpack serve --mode development",
     "start": "node server.js",

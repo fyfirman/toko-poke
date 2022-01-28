@@ -1,6 +1,11 @@
 {
   "routes": [
+    {
+      "src": "/assets/(.*)",
+      "headers": { "Cache-Control": "public, max-age=31556952, immutable" },
+      "continue": true
+    },
     { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/dist/index.html" }
+    { "src": "/(.*)", "dest": "/index.html", "continue": true }
   ]
 }
