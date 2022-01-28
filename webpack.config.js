@@ -46,5 +46,8 @@ module.exports = {
     },
     extensions: [".tsx", ".ts", ".js"],
   },
-  plugins: [new HtmlWebpackPlugin({ template: "./public/index.html" }), new DotenvWebpackPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({ template: "./public/index.html", favicon: "./public/favicon.ico" }),
+    new DotenvWebpackPlugin(),
+  ],
 };
