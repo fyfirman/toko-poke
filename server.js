@@ -1,8 +1,11 @@
 const path = require("path");
 const express = require("express");
 const expressStaticGzip = require("express-static-gzip");
+const history = require("connect-history-api-fallback");
 
 const app = express();
+
+app.use(history());
 
 app.use(
   expressStaticGzip(path.join(__dirname, "dist"), {
