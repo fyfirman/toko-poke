@@ -6,11 +6,11 @@ import { IPokemon } from "~/interfaces/Pokemon";
 import { format } from "fecha";
 import TypeList from "./ChipList";
 
-const Container = styled.div`
+const Container = styled.div<{ clickable: boolean }>`
   background-color: ${({ theme }) => theme.color.shark};
   border-radius: 12px;
   padding: 1rem;
-  cursor: pointer;
+  cursor: ${({ clickable }) => (clickable ? "pointer" : "inherit")};
   transition: all 0.2s;
 
   &:hover {
@@ -89,7 +89,7 @@ const PokeCard: React.FC<PokeCardProps> = (props) => {
   }, [id, name, onClick, pokemonName]);
 
   return (
-    <Container onClick={handleClick}>
+    <Container clickable={!withAction} onClick={handleClick}>
       <InfoSection>
         <Body>
           <Name>{name ? `${name} - ${pokemonName}` : pokemonName}</Name>

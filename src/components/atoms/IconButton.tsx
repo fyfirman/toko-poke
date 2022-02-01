@@ -8,6 +8,7 @@ const Container = styled.button<{ color?: string }>`
   border-radius: 8px;
   padding: 4px 8px 4px 4px;
   align-items: center;
+  cursor: pointer;
 `;
 
 const Text = styled.span`
