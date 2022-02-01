@@ -47,7 +47,9 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({ template: "./public/index.html", favicon: "./public/favicon.ico" }),
-    new DotenvWebpackPlugin(),
+    new DotenvWebpackPlugin({
+      systemvars: true,
+    }),
     new MiniCssExtractPlugin(),
     new CleanWebpackPlugin(),
     new CopyPlugin({
