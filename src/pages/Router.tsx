@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import styled from "@emotion/styled";
 import { Route, Redirect, Switch } from "react-router-dom";
 import Navbar from "~/components/organisms/Navbar";
+import Loading from "~/components/atoms/Loading";
 
 const Home = React.lazy(() => import("./Home"));
 const MyPokemon = React.lazy(() => import("./MyPokemon"));
@@ -23,7 +24,7 @@ const Router = () => {
   return (
     <Container>
       <Navbar />
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<Loading full />}>
         <Switch>
           <Route exact path="/">
             <Redirect to="/home" />

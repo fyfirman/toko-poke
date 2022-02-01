@@ -8,6 +8,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { Query } from "~/interfaces/Graphql";
 import { useMyPokemon } from "~/hooks/MyPokemonProvider";
 import { IMyPokemon, IPokemon } from "~/interfaces/Pokemon";
+import Loading from "~/components/atoms/Loading";
 import {
   Container,
   PokemonImage,
@@ -67,7 +68,7 @@ const PokemonDetail: React.FC = () => {
   };
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loading full />}>
       <Container>
         {!loading ? (
           <>
@@ -91,7 +92,7 @@ const PokemonDetail: React.FC = () => {
             <GatchaButton onClick={handleGatcha} />
           </>
         ) : (
-          <div>Loading</div>
+          <Loading />
         )}
       </Container>
       <SuccessModal

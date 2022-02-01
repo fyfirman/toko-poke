@@ -7,6 +7,7 @@ import { GET_POKEMON_LIST } from "~/graphql/PokemonOperation";
 import { PokemonItem, Query } from "~/interfaces/Graphql";
 import { IPokemon } from "~/interfaces/Pokemon";
 import useScroll from "~/hooks/useScroll";
+import Loading from "~/components/atoms/Loading";
 
 const Container = styled.div`
   padding: 0 1rem;
@@ -65,10 +66,12 @@ const Home: React.FC = () => {
               pokemonName={pokemon?.name as string}
             />
           ))}
-          <div ref={intersectionAreaRef as any}>Loading...</div>
+          <div ref={intersectionAreaRef as any}>
+            <Loading full />
+          </div>
         </Container>
       ) : (
-        <div>loading</div>
+        <Loading full />
       )}
     </div>
   );
