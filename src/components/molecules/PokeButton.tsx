@@ -6,6 +6,12 @@ const Container = styled.button<{ color?: string }>`
   padding: 20px;
   background-color: ${({ theme }) => theme.color.amethyst};
   border-radius: 100%;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 interface PokeButtonProps {

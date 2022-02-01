@@ -10,6 +10,12 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme.color.shark};
   border-radius: 12px;
   padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 const Name = styled.span`
@@ -90,7 +96,7 @@ const PokeCard: React.FC<PokeCardProps> = (props) => {
           <Id>#{id}</Id>
           {born && (
             <Born>
-              Born : {typeof born === "string" ? format(new Date(born), "DD MMM 'YY") : format(born, "DD Mm 'YY")}
+              Born : {typeof born === "string" ? format(new Date(born), "DD MMM 'YY") : format(born, "DD MMM 'YY")}
             </Born>
           )}
           {types && <TypeList data={types} />}

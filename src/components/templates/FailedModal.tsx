@@ -33,7 +33,7 @@ const FailedModal: React.FC<FailedModalProps> = (props) => {
       <Header>
         <span>{pokemonName}</span> is flee
       </Header>
-      <Button onClick={onRequestClose as any}>Try Again</Button>
+      <Button onClick={onRequestClose as any}>Close</Button>
     </Modal>
   );
 };

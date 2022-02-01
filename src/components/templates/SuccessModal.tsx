@@ -13,6 +13,11 @@ const Header = styled.h1`
   }
 `;
 
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
 const Image = styled.img`
   width: 100%;
 `;
@@ -22,14 +27,20 @@ const NameInput = styled(Input)`
   margin-bottom: 0.625rem;
 `;
 
+const ErrorText = styled.span`
+  margin-top: 0.5rem;
+  color: red;
+`;
+
 interface SuccessModalProps extends ReactModal.Props {
   pokemonName: string;
   imgSrc: string;
   onSavePokemon?: (name: string) => void;
+  error?: string;
 }
 
 const SuccessModal: React.FC<SuccessModalProps> = (props) => {
-  const { pokemonName, imgSrc, onSavePokemon, ...rest } = props;
+  const { pokemonName, imgSrc, onSavePokemon, error, ...rest } = props;
 
   const [name, setName] = useState("");
 
@@ -45,10 +56,11 @@ const SuccessModal: React.FC<SuccessModalProps> = (props) => {
       <Header>
         You got <span>{pokemonName}</span>!
       </Header>
-      <form>
+      <Form>
         <NameInput label="Please give it a name" name="name" onChange={(e) => setName(e.target.value)} />
         <Button onClick={handleSavePokemon}>Save</Button>
-      </form>
+        {error && <ErrorText>{error}</ErrorText>}
+      </Form>
     </Modal>
   );
 };

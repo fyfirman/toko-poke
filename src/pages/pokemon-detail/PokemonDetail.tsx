@@ -4,7 +4,7 @@ import ChipList from "~/components/molecules/ChipList";
 import uiTheme from "~/lib/theme";
 import { useQuery } from "@apollo/client";
 import { GET_POKEMON } from "~/graphql/PokemonOperation";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { Query } from "~/interfaces/Graphql";
 import { useMyPokemon } from "~/hooks/MyPokemonProvider";
 import { IPokemon } from "~/interfaces/Pokemon";
@@ -27,11 +27,13 @@ type OpenedModal = "success" | "failed";
 
 const PokemonDetail: React.FC = () => {
   const { name } = useParams<{ name: string }>();
+  const history = useHistory();
   const [openedModal, setOpenedModal] = useState<OpenedModal>();
   const { data, loading } = useQuery<Query>(GET_POKEMON, {
     variables: { name },
   });
-  const [_, dispatch] = useMyPokemon();
+  const [myPokemonList, dispatch] = useMyPokemon();
+  const [error, setError] = useState("");
 
   const handleGatcha = () => {
     setOpenedModal(Math.random() >= 0.5 ? "success" : "failed");
@@ -39,14 +41,22 @@ const PokemonDetail: React.FC = () => {
 
   const handleSavePokemon = (petName: string) => {
     if (!petName || !data?.pokemon?.id || !data.pokemon.name) {
+      setError(`Name is empty`);
       return;
     }
+
+    if (myPokemonList.find((value) => value.name === petName)) {
+      setError(`${petName} is already exist`);
+      return;
+    }
+
     const newPokemon: IPokemon = {
       id: data.pokemon.id,
       pokemonName: data.pokemon.name,
       name: petName,
     };
     dispatch({ type: "ADD", payload: newPokemon });
+    history.push("/my-pokemon");
   };
 
   return (
@@ -78,6 +88,7 @@ const PokemonDetail: React.FC = () => {
         )}
       </Container>
       <SuccessModal
+        error={error}
         imgSrc={getImageUrlByID(data?.pokemon?.id as number, "official-artwork")}
         isOpen={openedModal === "success"}
         onRequestClose={() => setOpenedModal(undefined)}

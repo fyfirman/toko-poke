@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "@emotion/styled";
 
 const Container = styled.button`
@@ -10,6 +10,12 @@ const Container = styled.button`
   font-weight: bold;
   border-radius: 8px;
   color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: scale(1.025);
+  }
 `;
 
 interface ButtonProps {
@@ -20,8 +26,16 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = ({ children, color, className, onClick }) => {
+  const handleClick: React.MouseEventHandler<HTMLButtonElement> = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (onClick) onClick();
+    },
+    [onClick],
+  );
+
   return (
-    <Container className={className} color={color} onClick={onClick}>
+    <Container className={className} color={color} onClick={handleClick}>
       {children}
     </Container>
   );
