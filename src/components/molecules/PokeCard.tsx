@@ -18,7 +18,7 @@ const Container = styled.div<{ clickable: boolean }>`
   }
 `;
 
-const Name = styled.span`
+const Name = styled.h2`
   font-family: Raleway;
   font-style: normal;
   font-weight: bold;
