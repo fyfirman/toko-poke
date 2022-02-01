@@ -77,7 +77,7 @@
 
 | Category            | Library               | Notes                             |
 | ------------------- | --------------------- | --------------------------------- |
-| Core                | React Native          |                                   |
+| Core                | React                 |                                   |
 | Core                | Typescript            |                                   |
 | Bundler             | Webpack               |                                   |
 | Transpiler          | TS Compiler           |                                   |
