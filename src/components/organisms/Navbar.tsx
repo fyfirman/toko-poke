@@ -44,14 +44,14 @@ const Navbar: React.FC<NavbarProps> = () => {
   return (
     <Container>
       <NavItem isHidden={location.pathname === "/" || location.pathname === "/home"} to="/">
-        <img alt="Back Icon" src={BackIcon} />
+        <img alt="Back Icon" height={30} src={BackIcon} width={30} />
       </NavItem>
       <NavItem to="/">
-        <img alt="Toko Poke Logo" src={Logo} />
+        <img alt="Toko Poke Logo" height={39} src={Logo} width={105} />
       </NavItem>
       <NavItem to="/my-pokemon">
         <MyPokemonContainer>
-          <img alt="My Pokemon Icon" src={PokeIcon} width={30} />
+          <img alt="My Pokemon Icon" height={30} src={PokeIcon} width={30} />
           <Chip>{myPokemonList.length}</Chip>
         </MyPokemonContainer>
       </NavItem>

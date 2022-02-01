@@ -101,7 +101,7 @@ const PokeCard: React.FC<PokeCardProps> = (props) => {
           )}
           {types && <TypeList data={types} />}
         </Body>
-        <Image alt={name} height={80} src={imageUrl} width={80} />
+        <Image alt={pokemonName} height={80} src={imageUrl} width={80} />
       </InfoSection>
       {withAction && (
         <ActionSection>
