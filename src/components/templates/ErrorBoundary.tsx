@@ -4,6 +4,7 @@ import CryingPikachu from "~/assets/images/crying-pikachu.jpg";
 
 type State = {
   hasError: boolean;
+  error?: Error;
 };
 
 const Container = styled.div`
@@ -25,8 +26,8 @@ class ErrorBoundary extends React.Component<any, State> {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError() {
-    return { hasError: true };
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
   }
 
   render() {
@@ -34,7 +35,10 @@ class ErrorBoundary extends React.Component<any, State> {
       return (
         <Container>
           <img alt="Error" src={CryingPikachu} />
-          <Title>Something went wrong.</Title>
+          <Title>
+            {" "}
+            {process.env.NODE_ENV !== "development" ? "Something went wrong." : `Error : ${this.state.error?.message}`}
+          </Title>
         </Container>
       );
     }
