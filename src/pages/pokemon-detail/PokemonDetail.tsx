@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import { getImageUrlByID } from "~/lib/pokemon";
 import ChipList from "~/components/molecules/ChipList";
 import uiTheme from "~/lib/theme";
-import SuccessModal from "~/components/templates/SuccessModal";
-import FailedModal from "~/components/templates/FailedModal";
 import { useQuery } from "@apollo/client";
 import { GET_POKEMON } from "~/graphql/PokemonOperation";
 import { useParams } from "react-router-dom";
@@ -21,6 +19,9 @@ import {
   MoveListText,
   GatchaButton,
 } from "./PokemonDetailStyles";
+
+const SuccessModal = React.lazy(() => import("~/components/templates/SuccessModal"));
+const FailedModal = React.lazy(() => import("~/components/templates/FailedModal"));
 
 type OpenedModal = "success" | "failed";
 
@@ -49,7 +50,7 @@ const PokemonDetail: React.FC = () => {
   };
 
   return (
-    <>
+    <Suspense fallback={<div>Loading...</div>}>
       <Container>
         {!loading ? (
           <>
@@ -88,7 +89,7 @@ const PokemonDetail: React.FC = () => {
         onRequestClose={() => setOpenedModal(undefined)}
         pokemonName={data?.pokemon?.name as string}
       />
-    </>
+    </Suspense>
   );
 };
 

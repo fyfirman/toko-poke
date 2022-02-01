@@ -1,9 +1,11 @@
+import React, { Suspense } from "react";
 import styled from "@emotion/styled";
 import { Route, Redirect, Switch } from "react-router-dom";
 import Navbar from "~/components/organisms/Navbar";
-import Home from "./Home";
-import MyPokemon from "./MyPokemon";
-import PokemonDetail from "./pokemon-detail/PokemonDetail";
+
+const Home = React.lazy(() => import("./Home"));
+const MyPokemon = React.lazy(() => import("./MyPokemon"));
+const PokemonDetail = React.lazy(() => import("./pokemon-detail/PokemonDetail"));
 
 const Container = styled.div`
   min-height: 100vh;
@@ -21,17 +23,19 @@ const Router = () => {
   return (
     <Container>
       <Navbar />
-      <Switch>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
-        <Route component={Home} path="/home" />
-        <Route component={PokemonDetail} path="/pokemon/:name" />
-        <Route component={MyPokemon} path="/my-pokemon" />
-        <Route path="*">
-          <Redirect to="/home" />
-        </Route>
-      </Switch>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          <Route exact path="/">
+            <Redirect to="/home" />
+          </Route>
+          <Route component={Home} path="/home" />
+          <Route component={PokemonDetail} path="/pokemon/:name" />
+          <Route component={MyPokemon} path="/my-pokemon" />
+          <Route path="*">
+            <Redirect to="/home" />
+          </Route>
+        </Switch>
+      </Suspense>
     </Container>
   );
 };
