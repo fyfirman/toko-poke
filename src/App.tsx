@@ -9,8 +9,6 @@ import { MyPokemonProvider } from "./hooks/MyPokemonProvider";
 import ErrorBoundary from "./components/templates/ErrorBoundary";
 
 function App() {
-  console.log(`process.env`, process.env);
-
   return (
     <ErrorBoundary>
       <ApolloProvider client={apolloClient}>
