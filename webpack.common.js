@@ -1,6 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const DotenvWebpackPlugin = require("dotenv-webpack");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 /** @type {import('webpack').Configuration} */
 module.exports = {
@@ -10,15 +12,11 @@ module.exports = {
     filename: "[name].bundle.js",
     chunkFilename: "[name].[chunkhash].bundle.js",
   },
-  devServer: {
-    port: 3000,
-    historyApiFallback: true,
-  },
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
         test: /\.tsx?$/,
@@ -49,5 +47,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({ template: "./public/index.html", favicon: "./public/favicon.ico" }),
     new DotenvWebpackPlugin(),
+    new MiniCssExtractPlugin(),
+    new CleanWebpackPlugin(),
   ],
 };
