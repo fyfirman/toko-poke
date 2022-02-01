@@ -6,18 +6,21 @@ import Router from "./pages/Router";
 import "~/styles/global.css";
 import apolloClient from "./lib/ApolloClient";
 import { MyPokemonProvider } from "./hooks/MyPokemonProvider";
+import ErrorBoundary from "./components/templates/ErrorBoundary";
 
 function App() {
   return (
-    <ApolloProvider client={apolloClient}>
-      <ThemeProvider theme={theme}>
-        <MyPokemonProvider>
-          <BrowserRouter>
-            <Router />
-          </BrowserRouter>
-        </MyPokemonProvider>
-      </ThemeProvider>
-    </ApolloProvider>
+    <ErrorBoundary>
+      <ApolloProvider client={apolloClient}>
+        <ThemeProvider theme={theme}>
+          <MyPokemonProvider>
+            <BrowserRouter>
+              <Router />
+            </BrowserRouter>
+          </MyPokemonProvider>
+        </ThemeProvider>
+      </ApolloProvider>
+    </ErrorBoundary>
   );
 }
 
