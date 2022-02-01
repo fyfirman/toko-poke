@@ -17,7 +17,9 @@
     "start": "node server.js",
     "lint": "eslint \"**/*.{ts,tsx}\"",
     "lint:fix": "eslint --fix \"**/*.{ts,tsx}\"",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "deploy:preview": "vercel --local-config ./vercel.json",
+    "deploy:prod": "vercel --local-config ./vercel.json --prod"
   },
   "dependencies": {
     "@apollo/client": "^3.5.8",
