@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const DotenvWebpackPlugin = require("dotenv-webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 /** @type {import('webpack').Configuration} */
@@ -49,6 +50,14 @@ module.exports = {
     new DotenvWebpackPlugin(),
     new MiniCssExtractPlugin(),
     new CleanWebpackPlugin(),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: "public/*.png",
+          to: "[name][ext]",
+        },
+      ],
+    }),
   ],
   optimization: {
     splitChunks: {

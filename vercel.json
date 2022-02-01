@@ -5,6 +5,10 @@
       "headers": { "Cache-Control": "public, max-age=3600, immutable" }
     },
     {
+      "src": "/og-image.png",
+      "headers": { "Cache-Control": "public, max-age=31556952, immutable" }
+    },
+    {
       "src": "/assets/(.*)",
       "headers": { "Cache-Control": "public, max-age=31556952, immutable" },
       "continue": true
