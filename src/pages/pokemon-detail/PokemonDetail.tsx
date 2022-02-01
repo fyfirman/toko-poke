@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useMemo, useState } from "react";
 import { getImageUrlByID } from "~/lib/pokemon";
 import ChipList from "~/components/molecules/ChipList";
 import uiTheme from "~/lib/theme";
@@ -7,7 +7,7 @@ import { GET_POKEMON } from "~/graphql/PokemonOperation";
 import { useHistory, useParams } from "react-router-dom";
 import { Query } from "~/interfaces/Graphql";
 import { useMyPokemon } from "~/hooks/MyPokemonProvider";
-import { IPokemon } from "~/interfaces/Pokemon";
+import { IMyPokemon, IPokemon } from "~/interfaces/Pokemon";
 import {
   Container,
   PokemonImage,
@@ -25,6 +25,8 @@ const FailedModal = React.lazy(() => import("~/components/templates/FailedModal"
 
 type OpenedModal = "success" | "failed";
 
+const TOP_MOVE_LIST_COUNT = 5;
+
 const PokemonDetail: React.FC = () => {
   const { name } = useParams<{ name: string }>();
   const history = useHistory();
@@ -34,6 +36,11 @@ const PokemonDetail: React.FC = () => {
   });
   const [myPokemonList, dispatch] = useMyPokemon();
   const [error, setError] = useState("");
+
+  const ownedPokemon: IMyPokemon[] = useMemo(
+    () => myPokemonList.filter((myPokemon) => myPokemon.pokemonName === name),
+    [myPokemonList, name],
+  );
 
   const handleGatcha = () => {
     setOpenedModal(Math.random() >= 0.5 ? "success" : "failed");
@@ -73,12 +80,12 @@ const PokemonDetail: React.FC = () => {
                 <TitleText>{data?.pokemon?.name}</TitleText>
                 <IdText>#{data?.pokemon?.id}</IdText>
               </HeaderSection>
-              <OwnedText>Owned: {10}</OwnedText>
+              <OwnedText>Owned: {ownedPokemon.length}</OwnedText>
               <ChipList data={data?.pokemon?.types?.map((type) => type?.type?.name) as string[]} />
-              <MoveListText>Move List</MoveListText>
+              <MoveListText>Top Move List</MoveListText>
               <ChipList
                 color={uiTheme.color.boulder}
-                data={data?.pokemon?.moves?.map((move) => move?.move?.name) as string[]}
+                data={data?.pokemon?.moves?.slice(0, TOP_MOVE_LIST_COUNT).map((move) => move?.move?.name) as string[]}
               />
             </InfoSection>
             <GatchaButton onClick={handleGatcha} />

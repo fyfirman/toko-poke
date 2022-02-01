@@ -12,6 +12,10 @@ const Container = styled.button<{ color?: string }>`
   &:hover {
     transform: scale(1.05);
   }
+  &:focus,
+  &:active {
+    transform: scale(0.975) rotate(1080deg);
+  }
 `;
 
 interface PokeButtonProps {

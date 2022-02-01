@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, memo } from "react";
 import styled from "@emotion/styled";
 
 const Container = styled.button`
@@ -15,6 +15,11 @@ const Container = styled.button`
 
   &:hover {
     transform: scale(1.025);
+  }
+
+  &:focus,
+  &:active {
+    transform: scale(0.975);
   }
 `;
 
@@ -41,4 +46,4 @@ const Button: React.FC<ButtonProps> = ({ children, color, className, onClick }) 
   );
 };
 
-export default Button;
+export default memo(Button);

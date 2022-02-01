@@ -4,6 +4,7 @@ import PokeButton from "~/components/molecules/PokeButton";
 export const Container = styled.div`
   text-align: center;
   padding: 0 1rem;
+  min-height: calc(100vh - 60px); // 60px is navbar size
 `;
 
 export const PokemonImage = styled.img`
@@ -45,7 +46,8 @@ export const MoveListText = styled.h2`
 `;
 
 export const GatchaButton = styled(PokeButton)`
-  position: sticky;
+  position: fixed;
   bottom: 1rem;
-  display: inline-flex;
+  left: 50%;
+  margin-left: -20px;
 `;
