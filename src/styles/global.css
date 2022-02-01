@@ -61,3 +61,14 @@ input{
 html{
 	background-color: #171727;
 }
+::-webkit-scrollbar {
+	width: 0.75rem;
+}
+::-webkit-scrollbar-thumb {
+	background-color: #ffffff33;
+	border-radius: 4px;
+
+}
+::-webkit-scrollbar-track {
+	background-color: #ffffff1f;
+}
